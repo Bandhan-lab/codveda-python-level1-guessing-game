@@ -36,13 +36,13 @@ class TestGuessingGame(unittest.TestCase):
             )
         self.assertEqual(mock_get_guess.call_count, 3)
 
-    @patch("guessing_game.get_guess", side_effect=["invalid", 30, 50])
-    def test_play_game_continues_after_invalid_input(self, mock_get_guess):
+    @patch("builtins.input", side_effect=["abc", "30", "50"])
+    def test_play_game_continues_after_invalid_input(self, mock_input):
         with patch("builtins.print"):
             self.assertTrue(
                 guessing_game.play_game(target=50, max_attempts=2)
             )
-        self.assertEqual(mock_get_guess.call_count, 3)
+        self.assertEqual(mock_input.call_count, 3)
 
     def test_play_game_win(self):
         with patch("guessing_game.get_guess", side_effect=[30, 50]):
