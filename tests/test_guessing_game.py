@@ -5,11 +5,10 @@ import guessing_game
 
 
 class TestGuessingGame(unittest.TestCase):
-    def test_generate_target_is_in_range(self):
-        for _ in range(100):
-            target = guessing_game.generate_target()
-            self.assertGreaterEqual(target, 1)
-            self.assertLessEqual(target, 100)
+    @patch("guessing_game.random.randint", return_value=42)
+    def test_generate_target_uses_expected_range(self, mock_randint):
+        self.assertEqual(guessing_game.generate_target(), 42)
+        mock_randint.assert_called_once_with(1, 100)
 
     def test_check_guess_too_low(self):
         self.assertEqual(guessing_game.check_guess(25, 50), "Too low!")
@@ -29,13 +28,40 @@ class TestGuessingGame(unittest.TestCase):
                 "Invalid input. Please enter a whole number."
             )
 
+    @patch("guessing_game.get_guess", side_effect=[150, 30, 50])
+    def test_play_game_rejects_out_of_range_guess(self, mock_get_guess):
+        with patch("builtins.print"):
+            self.assertTrue(
+                guessing_game.play_game(target=50, max_attempts=2)
+            )
+        self.assertEqual(mock_get_guess.call_count, 3)
+
+    @patch("guessing_game.get_guess", side_effect=["invalid", 30, 50])
+    def test_play_game_continues_after_invalid_input(self, mock_get_guess):
+        with patch("builtins.print"):
+            self.assertTrue(
+                guessing_game.play_game(target=50, max_attempts=2)
+            )
+        self.assertEqual(mock_get_guess.call_count, 3)
+
     def test_play_game_win(self):
         with patch("guessing_game.get_guess", side_effect=[30, 50]):
             self.assertTrue(guessing_game.play_game(target=50, max_attempts=3))
 
     def test_play_game_max_attempts(self):
         with patch("guessing_game.get_guess", side_effect=[10, 20, 30]):
-            self.assertFalse(guessing_game.play_game(target=50, max_attempts=3))
+            with patch("builtins.print") as mock_print:
+                self.assertFalse(
+                    guessing_game.play_game(target=50, max_attempts=3)
+                )
+        mock_print.assert_any_call("Game over! The correct number was 50.")
+
+    @patch("guessing_game.play_game", return_value=True)
+    @patch("builtins.input", side_effect=["n"])
+    def test_main_replay_prompt(self, mock_input, _mock_play_game):
+        with patch("builtins.print"):
+            guessing_game.main()
+        mock_input.assert_called_once_with("\nPlay again? (y/n): ")
 
 
 if __name__ == "__main__":
