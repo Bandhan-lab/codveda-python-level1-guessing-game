@@ -1,60 +1,122 @@
-# Number Guessing Game
+# 🎯 Number Guessing Game
 
-A command-line Number Guessing Game built in Python for the Codveda Technology Python Development Internship — Level 1, Task 2.
+> **Codveda Technology — Python Development Internship**  
+> **Level 1 · Task 2 — Number Guessing Game**
 
-## Features
+A fun command-line Python game where the computer secretly selects a number from **1 to 100** and challenges the player to find it within a limited number of valid attempts.
 
-- Generates a random number between 1 and 100.
-- Allows multiple valid attempts.
-- Gives "Too high!" or "Too low!" feedback.
-- Detects a correct guess and reports the number of attempts.
-- Ends the game after the maximum number of valid attempts.
-- Handles non-numeric input and guesses outside the 1–100 range.
-- Allows the player to start another round.
+## 🎮 Game Features
 
-## Requirements
+- 🎲 Random target number from **1–100**
+- 🔢 Multiple valid guessing attempts
+- ⬆️ **Too high!** feedback
+- ⬇️ **Too low!** feedback
+- 🎯 Correct-guess detection
+- ⏳ Maximum-attempt limit
+- 🛡️ Invalid-input handling
+- 📏 Out-of-range validation
+- 🔁 Play-again functionality
+- 🧪 Automated tests with unittest
 
-- Python 3.8 or newer
+## 🎯 Codveda Requirements
 
-No external Python packages are required.
+| Requirement | Implementation |
+|---|---|
+| Random number 1–100 | ✅ |
+| Multiple attempts | ✅ |
+| Too high / too low feedback | ✅ |
+| Correct guess ends game | ✅ |
+| Maximum attempts | ✅ |
+| Input validation | ✅ |
+| Replay option | ✅ |
 
-## Project Structure
+## 🕹️ Game Flow
 
-```
+~~~text
+             🎯 Start Game
+                  │
+                  ▼
+        Generate number 1–100
+                  │
+                  ▼
+             Enter guess
+                  │
+        ┌─────────┼─────────┐
+        ▼         ▼         ▼
+     Too Low   Correct   Too High
+        │         │         │
+        └────► Try Again ◄──┘
+                  │
+             Attempts left?
+               /                    Yes        No
+              │          │
+              ▼          ▼
+          Keep playing  Game over
+~~~
+
+## 🧰 Tech Stack
+
+- 🐍 Python 3
+- 🎲 Python random
+- 🧪 unittest
+- 💻 Command-line interface
+- 🌿 Git
+- 🐙 GitHub
+
+**No external Python packages are required.**
+
+## 🚀 Run the Game
+
+~~~bash
+git clone https://github.com/Bandhan-lab/codveda-python-level1-guessing-game.git
+cd codveda-python-level1-guessing-game
+python3 guessing_game.py
+~~~
+
+## 🧪 Run Tests
+
+~~~bash
+python3 -m unittest discover -s tests -v
+~~~
+
+Tests cover target generation, guessing feedback, invalid input, attempt limits, deterministic gameplay scenarios, and replay behavior.
+
+## 📁 Project Structure
+
+~~~text
 codveda-python-level1-guessing-game/
 ├── guessing_game.py
 ├── tests/
 │   └── test_guessing_game.py
 ├── README.md
 └── .gitignore
-```
+~~~
 
-## How to Run
+## 🧠 What This Project Demonstrates
 
-Clone the repository and open it in VS Code or a terminal.
+- Python functions
+- Random number generation
+- Loops and conditional logic
+- Input validation
+- Exception handling
+- Attempt/state management
+- Automated testing
+- Interactive CLI design
+- Git/GitHub workflow
 
-Run:
+## 📌 Project Status
 
-```bash
-python3 guessing_game.py
-```
+**Status:** ✅ Completed  
+**Program:** Codveda Technology — Python Development Internship  
+**Level:** 1 — Basic  
+**Task:** 2 — Number Guessing Game
 
-Follow the prompts to enter guesses.
+## 👨‍💻 Author
 
-## How to Run Tests
+**Bandhan Kumar Sahoo**  
+B.Tech — CSE (AI & ML)  
+GITA Autonomous College, Bhubaneswar, Odisha, India
 
-Run the test suite from the project root:
+Built as part of the Codveda Technology Python Development Internship.
 
-```bash
-python3 -m unittest discover -s tests -v
-```
-
-## Internship
-
-Developed as part of the Python Development Internship at Codveda Technology.
-
-Task: Level 1 — Task 2: Number Guessing Game
-
-## Author
-
-Bandhan Kumar Sahoo
+⭐ If you enjoy the project, consider giving the repository a star.
