@@ -84,12 +84,12 @@ def main() -> None:
     print("       NUMBER GUESSING GAME")
     print("=" * 34)
     print(f"I'm thinking of a number from {MIN_NUMBER} to {MAX_NUMBER}.")
-    print(f"You have {DEFAULT_MAX_ATTEMPTS} valid attempts to guess it.\\n")
+    print(f"You have {DEFAULT_MAX_ATTEMPTS} valid attempts to guess it.\n")
 
     while True:
         play_game()
 
-        replay = input("\\nPlay again? (y/n): ").strip().lower()
+        replay = input("\nPlay again? (y/n): ").strip().lower()
         if replay != "y":
             print("Thanks for playing!")
             break
